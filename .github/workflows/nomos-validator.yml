@@ -18,11 +18,12 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install markdown-it-py pymarkdownlnt requests  # For parsing and optional LLM
+        run: pip install markdown-it-py pymarkdownlnt requests
 
       - name: Run NOMOS Validator
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}  # Your Hugging Face token
         run: |
-          # Python script to analyze (see below)
           python nomos_validator.py whitepapers/*.md > legal_safety_report.md
 
       - name: Upload Report Artifact
