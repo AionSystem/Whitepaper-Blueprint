@@ -5,7 +5,7 @@ by Sheldon K. Salmon
 AI Safety Architect  
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)  
-[![Template Repository](https://img.shields.io/badge/Template%20Repo-Yes-green)](https://github.com/new?template_owner=AionSystem&template_repo=whitepaper-blueprint)  <!-- Adjust owner/repo if needed -->  
+[![Template Repository](https://img.shields.io/badge/Template%20Repo-Yes-purple)](https://github.com/new?template_owner=AionSystem&template_repo=whitepaper-blueprint)  <!-- Adjust owner/repo if needed -->  
 [![PDF Build Status](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml)  <!-- Update with your actual workflow path -->
 
 This open-source blueprint provides a structured, rigorous methodology for creating credible, accessible, and actionable whitepapers across any domain—especially technical, research, AI safety, strategic, or high-stakes fields.
