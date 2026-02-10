@@ -9,7 +9,6 @@ AI Safety Architect
 
 [![NOMOS Whitepaper Validator](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/nomos-validator.yml/badge.svg?branch=main)](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/nomos-validator.yml)
 
-[![NOMOS Validator](https://github.com/AionSystem/whitepaper-blueprint/workflows/NOMOS%20Whitepaper%20Validator/badge.svg)](https://github.com/AionSystem/whitepaper-blueprint/actions)
 
 [![PDF Build Status](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml)  <!-- Update with your actual workflow path -->
 
