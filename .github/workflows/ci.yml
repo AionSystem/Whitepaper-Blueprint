@@ -1,0 +1,49 @@
+name: CI - Generate Whitepaper PDF
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # Allows manual run from Actions tab
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Debug - List files in repo root
+        run: |
+          ls -la
+          echo "Check if Whitepaper-Blueprint-v1.1.md exists above!"
+          if [ ! -f "Whitepaper-Blueprint-v1.1.md" ]; then
+            echo "ERROR: Markdown file not found!"
+            exit 1
+          fi
+
+      - name: Install Pandoc and LaTeX dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-latex-base texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra
+
+      - name: Create output directory
+        run: mkdir -p output
+
+      - name: Convert Markdown to PDF with Pandoc
+        run: |
+          pandoc Whitepaper-Blueprint-v1.1.md \
+            -o output/Whitepaper-Blueprint-v1.1.pdf \
+            --pdf-engine=pdflatex \
+            -V geometry:margin=1in \
+            --toc \
+            --variable version=1.1 \
+            --highlight-style=pygments  # Optional: nice code highlighting if you add any
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: whitepaper-pdf
+          path: output/Whitepaper-Blueprint-v1.1.pdf
+          retention-days: 7  # Keeps artifact for 7 days
