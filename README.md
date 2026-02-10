@@ -119,7 +119,9 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for pathways: share examples, fix forma
 We're early—your input shapes this toolkit!
 
 
-## NOMOS Legal Safety Validator (Live Feature)
+## NOMOS Legal Safety Validator 
+
+(Live Feature)
 
 Drop your whitepaper draft into `whitepapers/your-draft.md` and push/PR.
 
