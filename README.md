@@ -36,8 +36,10 @@ Part of the broader AION cognitive infrastructure: [AION-BRAIN main repo](https:
 - [Universal Structure](#universal-structure)  
 - [Key Features & Tools](#key-features--tools)  
 - [Quick Start: Use as Template](#quick-start-use-as-template)  
-- [How to Contribute](#how-to-contribute)  
-- [License & Credits](#license--credits)  
+- [How to Contribute](#how-to-contribute)
+- [NOMOS Legal Safety Validator](#NOMOS-Legal-Safety-Validator)
+- [License & Credits](#license--credits)
+  
 
 ## Overview
 
@@ -115,6 +117,23 @@ Example: Adapt for an AI safety whitepaper—use Research-Insight type, cite evi
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for pathways: share examples, fix formatting, suggest improvements, add new types/sections.
 
 We're early—your input shapes this toolkit!
+
+
+## NOMOS Legal Safety Validator (Live Feature)
+
+Drop your whitepaper draft into `whitepapers/your-draft.md` and push/PR.
+
+The workflow automatically:
+- Scans for potential legal claims
+- Applies NOMOS-style FSVE tagging
+- Uses Hugging Face LLM (zero-shot) to estimate risk level
+- Generates a **Legal Safety Report** artifact
+- Comments on PRs with summary
+
+**Why it matters**: Helps flag high-risk statements (e.g., unsubstantiated compliance claims) before publishing — especially useful for AI safety, ethics, or regulated domains.
+
+Try it: Add a file → watch Actions → download report!
+
 
 ## License & Credits
 
