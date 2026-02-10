@@ -40,7 +40,7 @@ Part of the broader AION cognitive infrastructure: [AION-BRAIN main repo](https:
 - [Quick Start: Use as Template](#quick-start-use-as-template)  
 - [How to Contribute](#how-to-contribute)
 - [NOMOS Legal Safety Validator](#nomos-legal-safety-validator)
-- [AION NOMOS AI Safety Validator](#aion-nomos-ai-safety-validator]
+- [AION NOMOS AI Safety Validator](#aion-nomos-ai-safety-validator)
 - [License & Credits](#license--credits)
   
 
