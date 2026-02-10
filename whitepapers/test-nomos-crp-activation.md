@@ -45,4 +45,4 @@ Whitepaper authors must prioritize claim discipline. Next steps: Run NOMOS + CRP
 - GDPR Article 83 — fines up to €20M
 - CCPA revenue threshold $25M (unverified)
 
-This document is a test — do not publish without validation.
+This document is a test — do not publish without validation. 
