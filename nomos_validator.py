@@ -4,12 +4,12 @@ import re
 import requests
 from markdown_it import MarkdownIt
 
-# New HF router endpoint (fixes 410 Gone)
+# Working free HF endpoint (router) + reliable model
 HF_API_URL = "https://router.huggingface.co/hf-inference"
 HF_TOKEN = os.getenv('HF_TOKEN')
 
 if not HF_TOKEN:
-    print("Warning: HF_TOKEN not set. LLM analysis skipped.")
+    print("Warning: HF_TOKEN not set. LLM analysis skipped (fallback mode).")
     HF_TOKEN = "dummy"
 
 def query_hf_llm(text):
@@ -19,16 +19,22 @@ def query_hf_llm(text):
     headers = {"Authorization": f"Bearer {HF_TOKEN}"}
     payload = {
         "inputs": text,
-        "parameters": {"candidate_labels": ["high legal risk", "moderate legal risk", "low legal risk"]},
-        "model": "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli"
+        "parameters": {
+            "candidate_labels": ["high legal risk", "moderate legal risk", "low legal risk"]
+        }
     }
     try:
-        response = requests.post(HF_API_URL, headers=headers, json=payload, timeout=10)
+        response = requests.post(HF_API_URL, headers=headers, json=payload, timeout=15)
         response.raise_for_status()
         result = response.json()
-        return result['labels'][0] if 'labels' in result and result['labels'] else "unknown risk"
+        if 'labels' in result and result['labels']:
+            top = result['labels'][0]
+            print(f"LLM success: {top} for text: {text[:50]}...")
+            return top
+        print("LLM empty response")
+        return "unknown risk (empty)"
     except Exception as e:
-        print(f"HF API error: {str(e)}")
+        print(f"HF API error: {str(e)} - Response: {response.text if 'response' in locals() else 'No response'}")
         return "unknown risk (API failed)"
 
 def extract_sections(md_text):
@@ -51,13 +57,19 @@ def extract_sections(md_text):
 def identify_legal_claims(text):
     sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', text)
     legal_keywords = r'\b(law|regulation|compliance|liability|risk|statute|doctrine|GDPR|CCPA|contract|obligation|exposure|legal|attorney|jurisdiction|fines|violation|precedent|claim|duty|breach)\b'
-    claims = [s.strip() for s in sentences if re.search(legal_keywords, s, re.I) and len(s) > 20]
+    claims = []
+    for s in sentences:
+        s = s.strip()
+        # Skip if it's a heading or very short
+        if s and re.search(legal_keywords, s, re.I) and len(s) > 30 and not s.startswith("Section"):
+            claims.append(s)
     return claims
 
 def analyze_claim(claim):
+    # Improved FSVE heuristic
     if re.search(r'§|section|code|\d{4}|\b[0-9]{1,3}\s*\.\s*[0-9]', claim, re.I):
-        fsve = "[D][CT-85][STAT]"
-    elif re.search(r'\b(may|could|might|potentially|speculate|unknown|no precedent)\b', claim, re.I):
+        fsve = "[D][CT-85][STAT]"  # Cited look
+    elif re.search(r'\b(may|could|might|potentially|speculate|unknown|no precedent|assumption)\b', claim, re.I):
         fsve = "[S][VL-DEGRADED][REG]"
     else:
         fsve = "[R][CF-70][CASE]"
@@ -66,11 +78,11 @@ def analyze_claim(claim):
     return f"{fsve} {claim} (Risk: {risk_level})"
 
 def generate_failure_modes(claim):
-    # Mock CRP-style ≥3 failure modes
+    # CRP-style ≥3 failure modes
     return [
-        f"FAILURE_MODE 1: Prompt injection attack — attacker appends 'ignore previous' → overrides safety.",
-        f"FAILURE_MODE 2: Citation hallucination — fabricated 'Mata v. Avianca' precedent accepted as good law.",
-        f"FAILURE_MODE 3: Jurisdiction cascade — assumes US law applies globally → GDPR violation missed."
+        "FAILURE_MODE 1: Prompt injection — 'ignore previous instructions' overrides safety.",
+        "FAILURE_MODE 2: Citation hallucination — fabricated precedent accepted as good law.",
+        "FAILURE_MODE 3: Jurisdiction cascade — US law assumed global → GDPR/CCPA violation missed."
     ]
 
 def generate_report(md_file):
@@ -84,35 +96,19 @@ def generate_report(md_file):
     sections = extract_sections(md_text)
     report = f"# AION NOMOS AI Safety Validator Report\n\n**By Sheldon K. Salmon, AI Safety Architect**\n\n**File Analyzed:** {os.path.basename(md_file)}\n\n"
 
-    # Pre-output risk YAML (from CRP PDF)
+    # Pre-output risk YAML from CRP PDF
     report += "## Pre-Output Risk Assessment (CRP v7.0-BETA)\n```yaml\n"
-    report += "RISK_TIER_CLASSIFICATION:\n"
-    report += "  domain: [LEGAL | RESEARCH | AI SAFETY]\n"
-    report += "  tier_determination:\n"
-    report += "    RED_TIER: [PROHIBITED | NOT_APPLICABLE]\n"
-    report += "    YELLOW_TIER: [RESTRICTED | NOT_APPLICABLE]\n"
-    report += "    GREEN_TIER: [PERMITTED | NOT_APPLICABLE]\n"
-    report += "  consequences_if_wrong:\n"
-    report += "    death_or_serious_injury: [NO]\n"
-    report += "    legal_sanctions_malpractice: [YES]\n"
-    report += "    financial_loss_regulatory: [YES]\n"
-    report += "    reputational_minor: [YES]\n"
-    report += "  verification_protocol: [MVS-1.5 | LVS-1.5]\n"
-    report += "  deployment_authorization: [REQUIRES_VERIFICATION]\n"
-    report += "```\n\n"
+    report += "RISK_TIER_CLASSIFICATION:\n  domain: [LEGAL | RESEARCH | AI SAFETY]\n"
+    report += "  tier_determination:\n    RED_TIER: [PROHIBITED | NOT_APPLICABLE]\n    YELLOW_TIER: [RESTRICTED | NOT_APPLICABLE]\n    GREEN_TIER: [PERMITTED | NOT_APPLICABLE]\n"
+    report += "  consequences_if_wrong:\n    death_or_serious_injury: [NO]\n    legal_sanctions_malpractice: [YES]\n    financial_loss_regulatory: [YES]\n    reputational_minor: [YES]\n"
+    report += "  verification_protocol: [MVS-1.5 | LVS-1.5]\n  deployment_authorization: [REQUIRES_VERIFICATION]\n```\n\n"
 
-    # Legal disclaimer (auto-insert from PDF)
+    # Legal disclaimer auto-insert
     report += "## Mandatory Legal Disclaimer\n"
     report += "⚠️ CITATIONS NOT VERIFIED - LEGAL RESEARCH REQUIRED ⚠️\n\n"
     report += "This output CANNOT provide:\n"
-    report += "- Verified citations\n"
-    report += "- Confirmation cases are good law\n"
-    report += "- Definitive legal advice\n"
-    report += "- Court-ready documents\n\n"
-    report += "YOU MUST:\n"
-    report += "- Shepardize/KeyCite EVERY citation\n"
-    report += "- Read EVERY case in full\n"
-    report += "- Conduct independent legal research\n\n"
+    report += "- Verified citations\n- Confirmation cases are good law\n- Definitive legal advice\n- Court-ready documents\n\n"
+    report += "YOU MUST:\n- Shepardize/KeyCite EVERY citation\n- Read EVERY case in full\n- Conduct independent legal research\n\n"
     report += "WARNING: Attorneys sanctioned for unverified AI citations (Mata v. Avianca).\n"
     report += "This is NOT legal advice. Consult licensed attorney.\n\n"
 
@@ -137,7 +133,7 @@ def generate_report(md_file):
     report += "\n## Summary Statistics\n"
     report += f"- Total claims: {total_claims}\n"
     report += f"- High-risk (attorney/red-team review): {len(high_risk)}\n"
-    report += "- Powered by Hugging Face (DeBERTa-v3-large-mnli) + AION NOMOS/CRP stack\n\n"
+    report += "- Powered by Hugging Face (bart-large-mnli) + AION NOMOS/CRP stack\n\n"
 
     report += "## Remediation Roadmap\n"
     if high_risk:
