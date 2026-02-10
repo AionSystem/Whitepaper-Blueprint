@@ -37,7 +37,7 @@ Part of the broader AION cognitive infrastructure: [AION-BRAIN main repo](https:
 - [Key Features & Tools](#key-features--tools)  
 - [Quick Start: Use as Template](#quick-start-use-as-template)  
 - [How to Contribute](#how-to-contribute)
-- [NOMOS Legal Safety Validator](#NOMOS-Legal-Safety-Validator)
+- [NOMOS Legal Safety Validator](#nomos-legal-safety-validator)
 - [License & Credits](#license--credits)
   
 
