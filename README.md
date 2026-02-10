@@ -9,6 +9,8 @@ AI Safety Architect
 
 [![NOMOS Whitepaper Validator](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/nomos-validator.yml/badge.svg?branch=main)](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/nomos-validator.yml)
 
+[![NOMOS Validator](https://github.com/AionSystem/whitepaper-blueprint/workflows/NOMOS%20Whitepaper%20Validator/badge.svg)](https://github.com/AionSystem/whitepaper-blueprint/actions)
+
 [![PDF Build Status](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml)  <!-- Update with your actual workflow path -->
 
 This open-source blueprint provides a structured, rigorous methodology for creating credible, accessible, and actionable whitepapers across any domain—especially technical, research, AI safety, strategic, or high-stakes fields.
@@ -38,6 +40,7 @@ Part of the broader AION cognitive infrastructure: [AION-BRAIN main repo](https:
 - [Quick Start: Use as Template](#quick-start-use-as-template)  
 - [How to Contribute](#how-to-contribute)
 - [NOMOS Legal Safety Validator](#nomos-legal-safety-validator)
+- [AION NOMOS AI Safety Validator](#aion-nomos-ai-safety-validator]
 - [License & Credits](#license--credits)
   
 
@@ -135,6 +138,15 @@ The workflow automatically:
 **Why it matters**: Helps flag high-risk statements (e.g., unsubstantiated compliance claims) before publishing — especially useful for AI safety, ethics, or regulated domains.
 
 Try it: Add a file → watch Actions → download report!
+
+
+## AION NOMOS AI Safety Validator (Powered by CRP v7.0)
+
+Push drafts to `whitepapers/` → get NOMOS legal safety report + CRP red team analysis. Free LLM-powered, unique to AION stack.
+
+Inspired by Sheldon K. Salmon's NOMOS (CRP v7.0 + CEREBRO + Legal Engine 2). Features: FSVE tags, failure modes, disclaimers, cultural lenses.
+
+Try it: Add MD → push → download reports!
 
 
 ## License & Credits
