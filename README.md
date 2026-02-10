@@ -140,7 +140,9 @@ The workflow automatically:
 Try it: Add a file → watch Actions → download report!
 
 
-## AION NOMOS AI Safety Validator (Powered by CRP v7.0)
+## AION NOMOS AI Safety Validator
+
+(Powered by CRP v7.0)
 
 Push drafts to `whitepapers/` → get NOMOS legal safety report + CRP red team analysis. Free LLM-powered, unique to AION stack.
 
