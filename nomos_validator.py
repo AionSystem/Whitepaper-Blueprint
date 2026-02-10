@@ -21,7 +21,8 @@ def query_hf_llm(text):
         "inputs": text,
         "parameters": {
             "candidate_labels": ["high legal risk", "moderate legal risk", "low legal risk"]
-        }
+        },
+        "model": "MoritzLaurer/DeBERTa-v3-large-mnli-fever-anli-ling-wanli"  # Better for legal/risk
     }
     try:
         response = requests.post(HF_API_URL, headers=headers, json=payload, timeout=10)
@@ -84,7 +85,7 @@ def generate_report(md_file):
         return
 
     sections = extract_sections(md_text)
-    report = f"# NOMOS Legal Safety Report\n\n**File Analyzed:** {os.path.basename(md_file)}\n\n"
+    report = f"# AION NOMOS AI Safety Validator Report\n\n**By Sheldon K. Salmon, AI Safety Architect**\n\n**File Analyzed:** {os.path.basename(md_file)}\n\n"
     report += "## Identified Legal Claims\n\n"
 
     high_risk = []
