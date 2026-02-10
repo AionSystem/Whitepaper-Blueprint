@@ -10,7 +10,7 @@ These are ready-to-use prompt templates based on Whitepaper Blueprint v1.1.
 4. Paste into AI + fill in [YOUR TOPIC] / [YOUR IDEA]
 5. AI writes the full whitepaper in Markdown
 6. Save draft → push to whitepapers/ folder in your fork → get NOMOS + CRP safety reports
-7. Publish to Medium / AION repo
+7. Publish
 
 **Prompts included:**
 - 01-Basic-Prompt.md → Quick general whitepaper
