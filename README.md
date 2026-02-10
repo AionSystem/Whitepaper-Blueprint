@@ -8,11 +8,10 @@ AI Safety Architect
 [![Template Repository](https://img.shields.io/badge/Template%20Repo-Yes-purple)](https://github.com/new?template_owner=AionSystem&template_repo=whitepaper-blueprint)  <!-- Adjust owner/repo if needed -->  
 
 [![NOMOS Whitepaper Validator](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/nomos-validator.yml/badge.svg?branch=main)](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/nomos-validator.yml)
-
 [![CRP Red Team Validator](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/crp-redteam-validator.yml/badge.svg?branch=main)](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/crp-redteam-validator.yml)
 
 [![PDF Build Status](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml)  <!-- Update with your actual workflow path -->
-
+[![CodeQL Advanced](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/codeql.yml)
 This open-source blueprint provides a structured, rigorous methodology for creating credible, accessible, and actionable whitepapers across any domain—especially technical, research, AI safety, strategic, or high-stakes fields.
 
 Inspired by multi-lens analysis (Word Engine v2.2) and context-aware precision (Lexical Alchemy Engine v2.1 from the AION ecosystem), it ensures your whitepaper is:
