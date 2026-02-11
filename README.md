@@ -11,7 +11,7 @@ AI Safety Architect
 [![CRP Red Team Validator](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/crp-redteam-validator.yml/badge.svg?branch=main)](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/crp-redteam-validator.yml)
 
 [![PDF Build Status](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/AionSystem/whitepaper-blueprint/actions/workflows/ci.yml)  <!-- Update with your actual workflow path -->
-[![CodeQL Advanced](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/codeql.yml/badge.svg?branch=main)](https://github.com/AionSystem/Whitepaper-Blueprint/actions/workflows/codeql.yml)
+
 
 This open-source blueprint provides a structured, rigorous methodology for creating credible, accessible, and actionable whitepapers across any domain—especially technical, research, AI safety, strategic, or high-stakes fields.
 
