@@ -1,4 +1,4 @@
-# Whitepaper Blueprint v1.1
+# MUMON
 
 **A Universal Framework for Writing Effective Whitepapers**  
 by Sheldon K. Salmon  
