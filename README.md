@@ -1,4 +1,4 @@
-# MUMON
+# WHITEPAPER
 
 **A Universal Framework for Writing Effective Whitepapers**  
 by Sheldon K. Salmon  
